@@ -29,7 +29,7 @@ use taoser\SetArr;
 		],
 		......
 	];
-	$result = SetArr::configName('app')->add($data);
+	$result = SetArr::name('app')->add($data);
 ```
 
 ### 添加数组节点
@@ -105,7 +105,7 @@ $add = [
     ],
 ];
 
-$conf = \taoser\SetArr::configName('app')->add($data);
+$conf = \taoser\SetArr::name('app')->add($data);
 
 ```
 
@@ -168,7 +168,7 @@ $edit = [
     ],
 ];
 
-$conf = SetArr::configName('app')->edit($edit);
+$conf = SetArr::name('app')->edit($edit);
 
 ```
 
@@ -214,8 +214,8 @@ $del = [
         ],
 ];
 
-$conf = SetArr::configName('app')->delete($del);
+$conf = SetArr::name('app')->delete($del);
 
 ```
 
-详细参考 [作者](http://www.aieok.com)
+详细参考 [作者](http://wiki.aieok.com)

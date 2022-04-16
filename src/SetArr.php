@@ -1,13 +1,14 @@
 <?php
-/**
- * Created by vscode.
- * User: TaoLer changlin_zhao@qq.com
- * Website: www.aieok.com
- * Date: 2022-03-12
- * Time: 17:24
+/*
+ * @Author: TaoLer <alipey_tao@qq.com>
+ * @Date: 2022-04-14 16:05:35
+ * @LastEditTime: 2022-04-17 07:04:31
+ * @LastEditors: TaoLer
+ * @Description: 搜索引擎SEO优化设置
+ * @FilePath: \undefinede:\github\think-setarr\src\SetArr.php
+ * Copyright (c) 2020~2022 https://www.aieok.com All rights reserved.
  */
 namespace taoser;
-
 
 class SetArr
 {
@@ -24,65 +25,11 @@ class SetArr
 		self::$str = file_get_contents(self::$configFile);
 	}
 	
-	public static function configName(string $configName)
+	public static function name(string $configName)
 	{
 		self::$configName = $configName;
 		return new self;
 	}
-
-	 /**
-     * 修改配置
-     * @param string $file
-     * @param array $data
-     * @return \think\response\Json
-     */
-    function setConfig(string $file,array $data=[])
-    {
-        if (is_array($data)){
-            $fileurl = app()->getConfigPath() . $file.".php";
-            $string = file_get_contents($fileurl); //加载配置文件
-            foreach ($data as $key => $value) {
-				if(is_array($value)){//二维数组
-					foreach ($value as $k => $v) {
-						if(is_int($v)){//数字类型
-							$pats = '/\'' . $k . '\'(.*?),/';
-							$reps = "'". $k. "'". "	=> " . $v .",";
-							//halt($reps);
-						}else{//字符类型
-							$pats = '/\'' . $k . '\'(.*?)\',/';
-							$reps = "'". $k. "'". "	=> " . "'".$v ."',";
-						}
-
-						$string = preg_replace($pats, $reps, $string); // 正则查找然后替换
-					}
-					
-				}else{//一维数组
-					
-					if(is_int($value)){//数字类型
-						$pats = '/\'' . $key . '\'(.*?),/';
-						$reps = "'". $key. "'". "   => " . "".$value .",";
-					}else{//字符类型
-						$pats = '/\'' . $key . '\'(.*?)\',/';
-						$reps = "'". $key. "'". "   => " . "'".$value ."',";
-					}
-					
-					$string = preg_replace($pats, $reps, $string); // 正则查找然后替换
-				}
-            }
-			try {
-				file_put_contents($fileurl, $string); // 写入配置文件
-			}
-			catch (\Exception $e) {
-				// 这是进行异常捕获
-				//$e->getMessage();
-				return json(['code'=>-1,'msg'=> $file . '无写入权限']);
-			}
-
-            return json(['code'=>0,'msg'=>'配置修改成功']);
-        }else{
-           return json(['code'=>-1,'msg'=>'配置项错误！']);
-        }
-    }
 
 	/**
 	 * 新增配置项，支持三级数组配置
@@ -92,7 +39,6 @@ class SetArr
 	 */
 	public static function add(array $arr) :bool
 	{
-		dump(self::$str);
 		//正则];数组结尾
 		$end = '/\];/';
 		//一级配置，内容追加到return [一级配置,之后
@@ -953,6 +899,5 @@ class SetArr
 			return false;
 		}
 	}
-
 	
 }
