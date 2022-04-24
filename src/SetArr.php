@@ -784,16 +784,22 @@ class SetArr
 				}
 			}
 
-			/* 匹配空数组
-				*	'key' => [
-				*		],
-				*/ 
-			$nullArray = '/[^\n]*\'\w+\'\s*=>\s*\[\s*\]{1}\S*\,?\r?\n/m';
-			//preg_match($nullArray,self::$str,$arr);
-			self::$str = preg_replace($nullArray, '', self::$str);
+			// 是否清理空数组？
 
 		}
 		//写入配置
+		return  file_put_contents(self::$configFile, self::$str) ? true : false;
+	}
+	
+	/* 匹配空数组
+	*	'key' => [
+	*		],
+	*/ 
+	public static function clearNullArr()
+	{
+		$nullArray = '/[^\n]*\'\w+\'\s*=>\s*\[\s*\]{1}\S*\,?\r?\n/m';
+		//preg_match($nullArray,self::$str,$arr);
+		self::$str = preg_replace($nullArray, '', self::$str);
 		return  file_put_contents(self::$configFile, self::$str) ? true : false;
 	}
 
