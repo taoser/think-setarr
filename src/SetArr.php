@@ -4,7 +4,7 @@
  * @Date: 2022-04-14 16:05:35
  * @LastEditTime: 2022-04-17 07:04:31
  * @LastEditors: TaoLer
- * @Description: 搜索引擎SEO优化设置
+ * @Description: Config配置文件设置
  * @FilePath: \undefinede:\github\think-setarr\src\SetArr.php
  * Copyright (c) 2020~2022 https://www.aieok.com All rights reserved.
  */
@@ -691,7 +691,7 @@ class SetArr
 						echo $k.'不存在 '; 
 						return false;
 					}
-					$patk = '/[^\n]*\'' . $v . '\'(.*?)\r?\n/';
+					$patk = '/[^\n]*\'' . $k . '\'(.*?)\r?\n/';
 				}
 
 				// 正则查找然后替换
